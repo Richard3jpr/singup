@@ -1,0 +1,29 @@
+<form method= "POST" action="login1.php">
+<p><lable>Name</lable> <input type="text" name="Name"></p>
+<p><lable>Password</lable> <input type="password" name="Password"></p>
+<p> <input type="submit" name="Submit"></p>
+</form>
+
+
+<?php
+$x=$_POST['Name'];
+$w=$_POST['Password'];
+include("database.php");
+$db=mysql_select_db("rich");
+/*$x=stripcslashes('$x');
+$w=stripcslashes('$w');
+$x=mysql_real_escape_string($x);
+$w=mysql_real_escape_string($w);*/
+$query=("select * from login where Name='$x' and Password='$w'")
+or die("failed to database".mysql_error());
+$result=mysql_query($query);
+$row=mysql_fetch_array($result);
+if($row['Name']==$x && $row['Password']==$w)
+{
+ echo "success"."WELCOME"."<br>".$x;
+}
+else
+{
+	echo "invalid account don't try this";
+}
+?>
